@@ -1,0 +1,105 @@
+Min 3xAI + 2xAII + 7xAIII + 6xAIV+
+7xBI + 5xBII + 2xBIII + 3xBIV+
+2xCI + 5xCII + 4xCIII + 5xCIV
+
+ST
+
+xAI + xAII + xAIII + xAIV = 5000
+xBI + xBII + xBIII + xBIV = 6000
+xCI + xCII + xCIII + xCIV = 2500
+
+xAI + xBI + xCI = 6000
+xAII + xBII + xCII = 4000
+xAIII + xBIII + xCIII = 2000
+xAIV + xBIV + xCIV = 1500
+
+xAI >= 0
+xAII >= 0
+xAIII >= 0
+xAIV >= 0
+
+xBI >= 0
+xBII >= 0
+xBIII >= 0
+xBIV >= 0
+
+xCI >= 0
+xCII >= 0
+xCIII >= 0
+xCIV >= 0
+
+END
+
+
+                                Variable           Value        Reduced Cost
+                                     XAI        3500.000            0.000000
+                                    XAII        1500.000            0.000000
+                                   XAIII        0.000000            8.000000
+                                    XAIV        0.000000            6.000000
+                                     XBI        0.000000            1.000000
+                                    XBII        2500.000            0.000000
+                                   XBIII        2000.000            0.000000
+                                    XBIV        1500.000            0.000000
+                                     XCI        2500.000            0.000000
+                                    XCII        0.000000            4.000000
+                                   XCIII        0.000000            6.000000
+                                    XCIV        0.000000            6.000000
+
+
+
+------------------------------------------------------------------
+
+
+SETS:
+
+PLANTA: PRODUCCION;
+DESTINO: DEMANDA;
+VIAJE (PLANTA,DESTINO): COSTO, PRODUCTOS;
+
+ENDSETS
+
+DATA:
+
+PLANTA = P1 P2 P3;
+DESTINO = D1 D2 D3 D4;
+
+PRODUCCION = 5000 6000 2500;
+DEMANDA = 6000 4000 2000 1500;
+
+COSTO = 3 2 7 6
+	7 5 2 3
+	2 5 4 5;
+
+ENDDATA
+
+MIN = @SUM(VIAJE(I,J):COSTO(I,J)*PRODUCTOS(I,J));
+
+@FOR(DESTINO(K): @SUM(PLANTA(J):PRODUCTOS(J,K))=DEMANDA(K));
+@FOR(PLANTA(I): @SUM(DESTINO(J):PRODUCTOS(I,J))=PRODUCCION(I));
+
+END
+
+
+
+------------------- RESULTADOS ------------------------------------
+
+		      PRODUCTOS( P1, D1)        3500.000            0.000000
+                      PRODUCTOS( P1, D2)        1500.000            0.000000
+                      PRODUCTOS( P1, D3)        0.000000            8.000000
+                      PRODUCTOS( P1, D4)        0.000000            6.000000
+                      PRODUCTOS( P2, D1)        0.000000            1.000000
+                      PRODUCTOS( P2, D2)        2500.000            0.000000
+                      PRODUCTOS( P2, D3)        2000.000            0.000000
+                      PRODUCTOS( P2, D4)        1500.000            0.000000
+                      PRODUCTOS( P3, D1)        2500.000            0.000000
+                      PRODUCTOS( P3, D2)        0.000000            4.000000
+                      PRODUCTOS( P3, D3)        0.000000            6.000000
+                      PRODUCTOS( P3, D4)        0.000000            6.000000
+
+
+
+
+
+
+
+
