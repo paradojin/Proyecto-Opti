@@ -56,8 +56,7 @@ def generate_problem ():
     
     
     
-    #problemSize = random.randint(1,3)
-    problemSize = 1
+    problemSize = random.randint(1,3)
     
     # 1: Pequeño
     # 2: Mediano
@@ -66,8 +65,8 @@ def generate_problem ():
     # Casos inicialmente considerados Oferta = Demanda y Oferta > Demanda
 
     if problemSize == 1:
-        nplantas = random.randint(10,15)
-        nreceptores = random.randint(10,15)
+        nplantas = random.randint(10,99)
+        nreceptores = random.randint(10,99)
     elif problemSize == 2:
         nplantas = random.randint(100,999)
         nreceptores = random.randint(100,999)
