@@ -46,14 +46,14 @@ def funcion_objetivo(mat,oferta,demanda):
     for i in range(0,len(mat)):
         for j in range(0,len(mat[i])) :
             if fo == "":
-                fo= "Min = " + str(mat[i][j])+"x"+ str(i+1) + str(j+1)
+                fo= "Min = " + str(mat[i][j])+"*x"+ str(i+1) + str(j+1)
                 
             
             else:
-                fo= fo + " + "+ str(mat[i][j])+"x"+ str(i+1) + str(j+1)
+                fo= fo + " + "+ str(mat[i][j])+"*x"+ str(i+1) + str(j+1)
                 
             
-    fo=fo +"\n"
+    fo=fo +";"+"\n"
     
     for a in range(0,len(oferta)):
         contador=0
@@ -81,7 +81,7 @@ def funcion_objetivo(mat,oferta,demanda):
     return fo+"\n"+rest_of+rest_dem
 
 def crear_archivo(funcion):
-    archivo= open("Modelo Transporte.txt","w") 
+    archivo= open("Modelo Transporte.lg4","w") 
     archivo.write(funcion)  
     archivo.close
 
