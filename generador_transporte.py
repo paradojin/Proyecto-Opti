@@ -42,8 +42,21 @@ def generate_random_list(size, a, b):
         return_list.append(random.randint(a,b))
     return return_list  
     
+def generate_random_list_sum(size, a, b, limit):
 
-def generate_problem ():
+    random_list = list()
+    last = 0
+
+    while last <= 0:
+        random_list.clear()
+        for i in range(0,size - 1):
+            random_list.append(random.randint(a,b))
+        last = limit - sum(random_list)
+
+    random_list.append(last)
+    return random_list
+
+def generate_problem():
 
     # PROBLEMA DE TRANSPORTE
     
@@ -51,9 +64,8 @@ def generate_problem ():
     #   - OFERTA DE PLANTAS
     #   - DEMANDA DE PRODUCTOS
     #   - COSTO POR UNITARIO POR TRANSPORTE
-    #   - RUTAS HABILITADAS (PARA PROBLEMA MIXTO DE TRANSPORTE)
 
-    # MINIMIZAR COSTO TOTAL, O MAXIMIZAR UTILIDADES ¿?
+    # MINIMIZAR COSTO TOTAL, O MAXIMIZAR UTILIDADES ¿?g
 
     # RESTRICCIONES:
     #   - SATISFACER DEMANDA Y/O RESPETAR OFERTA(BALANCEADO O DESBALANCEADO)
@@ -81,14 +93,30 @@ def generate_problem ():
 
     cost_matrix = generate_matrix(nplantas, nreceptores, 100) # Costo unitario de transporte desde i hasta j.
 
-    isMixed = True if random.randint(0,1) else False
-    if(isMixed):
-        unitary_matrix  = generate_matrix(nplantas, nreceptores, 1) # Restriccion de caminos posibles
-    else:
-        unitary_matrix = None
     
+
+    # Definicion a priori de la oferta y demanda
     oferta = generate_random_list(nplantas, 0, 100) # Lista de productos ofertados por cada planta
     demanda = generate_random_list(nreceptores, 0, 100) # Lista de productos solicitados por cada demandante
+
+    balance_type = random.randint(1,3)
+
+    # 1: of < de
+    # 2: of == de
+    # 3: of > de
+
+    # print("balance type = ",balance_type)
+    if balance_type == 1:
+        while(sum(oferta) > sum(demanda)):
+            oferta = generate_random_list(nplantas, 0, 100) # Lista de productos ofertados por cada planta
+            demanda = generate_random_list(nreceptores, 0, 100) # Lista de productos solicitados por cada demandante
+    elif balance_type == 2:
+        oferta = generate_random_list(nplantas, 0, 100) # Lista de productos ofertados por cada planta
+        demanda = generate_random_list_sum(nreceptores, 0, 100, sum(oferta))
+    else:
+        while(sum(oferta) < sum(demanda)):
+            oferta = generate_random_list(nplantas, 0, 100) # Lista de productos ofertados por cada planta
+            demanda = generate_random_list(nreceptores, 0, 100) # Lista de productos solicitados por cada demandante
 
 
     # --------------------------------------------------------------------------
@@ -101,13 +129,10 @@ def generate_problem ():
 
     print("Problema de transporte, con "+str(nplantas)+ " plantas y "+str(nreceptores)+ " demandantes generado.")
     
-    return (nplantas, nreceptores, oferta, demanda, cost_matrix, unitary_matrix)
+    print("sum oferta "+str(sum(oferta))+" | sum demanda "+str(sum(demanda)))
     
-
-def get_lingo_input():
-    ...
+    return (nplantas, nreceptores, oferta, demanda, cost_matrix)
     
-
 
 generate_problem()
     
