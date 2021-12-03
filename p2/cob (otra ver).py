@@ -131,7 +131,7 @@ for llave in diccionario:
 
     while(True):
         # N° zonas cubiertas por antena
-        antena_cobertura=random.randint(2, cantidad_zonas - 1) # Forzar a que cada antena cubra por lo menos 2 zonas.
+        antena_cobertura=random.randint(2, cantidad_zonas) # Forzar a que cada antena cubra por lo menos 2 zonas.
         # De todas maneras se puede cambiar a 1, considerando una antena que cubra unicamente 1 zona.
         # Lo anterior fuerza a que debe existir por lo menos 2 zonas.
 
@@ -143,7 +143,7 @@ for llave in diccionario:
                 break
             
             # Asignar zonas aleatorias no consideradas.
-            zona_seleccionada=random.randint(1, cantidad_zonas - 1)
+            zona_seleccionada=random.randint(1, cantidad_zonas)
 
             if (zona_seleccionada not in coberturas_por_antena):
                 coberturas_por_antena.append(zona_seleccionada)
