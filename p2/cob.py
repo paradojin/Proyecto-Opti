@@ -49,7 +49,7 @@ auxiliar=Pais
 for llave in diccionario:
     bandera=1
     while(bandera==1):
-        antena_cobertura=random.randint(2, regiones_creadas)
+        antena_cobertura=random.randint(1, regiones_creadas)
         coberturas_por_antena=[]
         for elem in range(antena_cobertura):
             anti_infactible=random.randint(1,regiones_creadas)
@@ -63,7 +63,7 @@ for llave in diccionario:
                 if elemento in auxiliar:
                     auxiliar.remove(elemento)
             diccionario[llave]=coberturas_por_antena
-            bander=0
+            bandera=0
         
 while len(auxiliar)>0:
     verificacion=len(auxiliar)
