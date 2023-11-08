@@ -1,3 +1,3 @@
 # Proyecto-Opti
 
-## PABLITO SHILE KNZ en el lol sale su ranked?
+## Se trata de un ejercicio de optimización 
